@@ -12,11 +12,13 @@ function App() {
   const [loading, setloading] = useState(false);
   const [tours, setTours] = useState([]);
 
+  //create remove tours function
   const removeTour = (id) => {
     const newTours = tours.filter((tour) => tour.id !== id);
     setTours(newTours);
   };
 
+  //fetch tour data function
   const fetchTours = async () => {
     setloading(true);
     try {
@@ -31,10 +33,12 @@ function App() {
     }
   };
 
+  //fetch data on page load
   useEffect(() => {
     fetchTours();
   }, []);
 
+  //show loading component while fetching data
   if (loading) {
     return (
       <main>
@@ -43,6 +47,7 @@ function App() {
     );
   }
 
+  //if tour data is empty show empty state
   if (tours.length === 0) {
     return (
       <main>
@@ -58,6 +63,7 @@ function App() {
     );
   }
 
+  //if tour data is not empty show below component
   return (
     <main>
       <Tours tours={tours} removeTour={removeTour} />
